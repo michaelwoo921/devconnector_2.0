@@ -2,19 +2,17 @@ import './App.css';
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
-import axios from 'axios';
+import { setAlert } from './actions/alert';
 import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Alert from './components/layout/Alert';
 import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
 import NotFound from './components/layout/NotFound';
 
 function App() {
-  useEffect(() => {
-    axios.get('/api').then((res) => console.log(res.data));
-  }, []);
+  useEffect(() => {}, []);
   return (
     <Provider store={store}>
       <Router>
