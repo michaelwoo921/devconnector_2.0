@@ -1,9 +1,13 @@
 const express = require('express');
 require('dotenv').config();
-const app = express();
+const userRouter = require('./routes/api/users');
 const connectDB = require('./db');
 
 connectDB();
+const app = express();
+
+app.use(express.json());
+app.use('/api/users', userRouter);
 
 app.get('/api', (req, res) => {
   res.send('api running ...');
