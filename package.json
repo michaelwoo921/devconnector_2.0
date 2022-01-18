@@ -1,26 +1,29 @@
 {
-  "name": "devconnector",
+  "name": "devconnector_2.0",
   "version": "1.0.0",
-  "description": "Social network for developers",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
-  "author": "Brad Traversy",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelwoo921/devconnector_2.0.git"
+  },
+  "author": "Michael Woo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelwoo921/devconnector_2.0/issues"
+  },
+  "homepage": "https://github.com/michaelwoo921/devconnector_2.0#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.1.0",
-    "express": "^4.16.4",
-    "express-validator": "^5.3.1",
-    "gravatar": "^1.8.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.5.1",
-    "request": "^2.88.0"
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "mongoose": "^6.1.7"
   },
   "devDependencies": {
-    "concurrently": "^4.1.0",
-    "nodemon": "^1.18.11"
+    "nodemon": "^2.0.15"
   }
 }
