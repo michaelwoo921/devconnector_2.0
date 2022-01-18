@@ -14,6 +14,9 @@ router.get('/', (req, res) => {
   res.send('users test route');
 });
 
+// @route POST /api/users
+// @desc register user and token response
+// @access public
 router.post(
   '/',
   body('email').isEmail().withMessage('Provide a valid email'),
@@ -22,6 +25,7 @@ router.post(
     .withMessage('must be at least 5 characters'),
   body('name').notEmpty().withMessage('name is required'),
   async (req, res) => {
+    // validate body
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -29,6 +33,7 @@ router.post(
 
     const { email, password, name } = req.body;
     try {
+      // get avatar and encrypt password
       const avatar = gravatar.url(email, { s: '200', r: 'pg', d: '404' });
       let user = await User.findOne({ email });
       if (user) {
@@ -42,7 +47,7 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
       await user.save();
-
+      // sign token and return token
       jwt.sign(
         { user: { id: user._id } },
         process.env.jwtSecret,
