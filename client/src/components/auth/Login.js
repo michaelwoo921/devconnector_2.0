@@ -16,11 +16,11 @@ const Login = ({ login }) => {
     login(email, password);
   };
   return (
-    <section>
-      <h1> Sign In</h1>
-      <p> Sign into Your Account </p>
-      <form onSubmit={submitForm}>
-        <div>
+    <section className="container">
+      <h1 className="large text-primary"> Sign In</h1>
+      <p className="lead"> Sign into Your Account </p>
+      <form className="form" onSubmit={submitForm}>
+        <div className="form-group">
           <input
             type="text"
             placeholder="Email"
@@ -30,7 +30,7 @@ const Login = ({ login }) => {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <input
             type="text"
             placeholder="Password"
@@ -40,9 +40,9 @@ const Login = ({ login }) => {
           />
         </div>
 
-        <input type="submit" value="Login" />
+        <input type="submit" className="btn btn-primary" value="Login" />
       </form>
-      <p>
+      <p className="my-1">
         Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
     </section>

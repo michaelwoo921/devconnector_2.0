@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 
 const Alert = ({ alerts }) => {
   return (
-    <div>
+    <div className="alert-wrapper">
       {alerts.map((alert) => (
-        <div id={alert.id}>{alert.msg}</div>
+        <div id={alert.id} className={`alert alert-${alert.alertType}`}>
+          {alert.msg}
+        </div>
       ))}
     </div>
   );

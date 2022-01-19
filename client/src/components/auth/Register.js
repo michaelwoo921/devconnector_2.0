@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import { Link } from 'react-router-dom';
 import Alert from '../layout/Alert';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const initialState = {
     name: '',
     email: '',
@@ -20,16 +21,16 @@ const Register = ({ setAlert }) => {
   const submitForm = (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert('password does not match');
+      setAlert('password does not match', 'danger');
     }
-    console.log(formData);
+    register(formData);
   };
   return (
-    <section>
-      <h1> Sign Up</h1>
-      <p> Create Your Account </p>
-      <form onSubmit={submitForm}>
-        <div>
+    <section className="container">
+      <h1 className="large text-primary"> Sign Up</h1>
+      <p className="lead"> Create Your Account </p>
+      <form className="form" onSubmit={submitForm}>
+        <div className="form-group">
           <input
             type="text"
             placeholder="Name"
@@ -38,7 +39,7 @@ const Register = ({ setAlert }) => {
             onChange={onChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <input
             type="text"
             placeholder="Email"
@@ -46,12 +47,13 @@ const Register = ({ setAlert }) => {
             value={email}
             onChange={onChange}
           />
+          <small className="form-text">
+            This site uses Gravatar so if you want a profile image, use a
+            Gravatar email
+          </small>
         </div>
-        <small>
-          This site uses Gravatar so if you want a profile image, use a Gravatar
-          email
-        </small>
-        <div>
+
+        <div className="form-group">
           <input
             type="text"
             placeholder="Password"
@@ -60,7 +62,7 @@ const Register = ({ setAlert }) => {
             onChange={onChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <input
             type="text"
             placeholder="Confirm Password"
@@ -69,13 +71,13 @@ const Register = ({ setAlert }) => {
             onChange={onChange}
           />
         </div>
-        <input type="submit" value="Register" />
+        <input className="btn btn-primary" type="submit" value="Register" />
       </form>
-      <p>
+      <p className="my-1">
         Already have an account? <Link to="/login">Sign In</Link>
       </p>
     </section>
   );
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);

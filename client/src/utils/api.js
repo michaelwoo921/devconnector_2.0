@@ -1,5 +1,5 @@
 import axios from 'axios';
-const token = localStorage.token;
+const token = localStorage.getItem('token');
 let api;
 
 if (!token) {

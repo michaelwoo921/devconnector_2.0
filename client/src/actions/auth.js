@@ -6,6 +6,8 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGOUT,
+  REGISTER_FAIL,
+  REGISTER_SUCCESS,
 } from './types';
 
 export const loadUser = () => async (dispatch) => {
@@ -26,7 +28,7 @@ export const loadUser = () => async (dispatch) => {
 export const login = (email, password) => async (dispatch) => {
   try {
     const res = await api.post('/auth', { email, password });
-
+    localStorage.setItem('token', res.data.token);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
@@ -38,7 +40,7 @@ export const login = (email, password) => async (dispatch) => {
 
     errors.forEach((err) => {
       console.log(err.msg);
-      dispatch(setAlert(err.msg));
+      dispatch(setAlert(err.msg, 'danger'));
     });
 
     dispatch({
@@ -47,4 +49,31 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const logout = () => ({ type: LOGOUT });
+export const register = (formData) => async (dispatch) => {
+  try {
+    const res = await api.post('/users', formData);
+    localStorage.setItem('token', res.data.token);
+    dispatch({
+      type: REGISTER_SUCCESS,
+      payload: res.data,
+    });
+
+    dispatch(loadUser());
+  } catch (error) {
+    const { errors } = error.response.data;
+
+    errors.forEach((err) => {
+      console.log(err.msg);
+      dispatch(setAlert(err.msg, 'danger'));
+    });
+
+    dispatch({
+      type: REGISTER_FAIL,
+    });
+  }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.token = null;
+  dispatch({ type: LOGOUT });
+};

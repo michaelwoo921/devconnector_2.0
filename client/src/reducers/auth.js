@@ -4,6 +4,8 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGOUT,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -23,7 +25,7 @@ const auth = (state = initialState, action) => {
       };
 
     case LOGIN_SUCCESS:
-      localStorage.token = action.payload.token;
+    case REGISTER_SUCCESS:
       return {
         ...state,
         ...action.payload,
@@ -31,9 +33,9 @@ const auth = (state = initialState, action) => {
         isAuthenticated: true,
       };
     case LOGIN_FAIL:
+    case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGOUT:
-      localStorage.token = null;
       return {
         ...state,
         loading: false,
