@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect } from 'react';
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 import store from './store';
 import { setAlert } from './actions/alert';
 import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -10,22 +10,31 @@ import Alert from './components/layout/Alert';
 import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
 import NotFound from './components/layout/NotFound';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
-  useEffect(() => {}, []);
+  const auth = useSelector((state) => state.auth);
+  const { isAuthenticated } = auth;
   return (
-    <Provider store={store}>
-      <Router>
-        <Navbar />
-        <Alert />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </Provider>
+    <Router>
+      <Navbar />
+      <Alert />
+      <Routes>
+        <Route
+          path="/"
+          element={isAuthenticated ? <Dashboard /> : <Landing />}
+        />
+        <Route
+          path="/register"
+          element={isAuthenticated ? <Dashboard /> : <Register />}
+        />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Dashboard /> : <Login />}
+        />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
