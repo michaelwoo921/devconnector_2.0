@@ -11,6 +11,7 @@ import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
 import NotFound from './components/layout/NotFound';
 import Dashboard from './components/dashboard/Dashboard';
+import Profiles from './components/profiles/Profiles';
 
 function App() {
   const auth = useSelector((state) => state.auth);
@@ -24,6 +25,7 @@ function App() {
           path="/"
           element={isAuthenticated ? <Dashboard /> : <Landing />}
         />
+        <Route path="/profiles" element={<Profiles />} />
         <Route
           path="/register"
           element={isAuthenticated ? <Dashboard /> : <Register />}
