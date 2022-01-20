@@ -63,6 +63,34 @@ img {
   color: var(--dark-color);
 }
 
+/* Padding */
+.p {
+  padding: 0.5rem;
+}
+.p-1 {
+  padding: 1rem;
+}
+.p-2 {
+  padding: 2rem;
+}
+.p-3 {
+  padding: 3rem;
+}
+.py {
+  padding: 0.5rem 0;
+}
+.py-1 {
+  padding: 1rem 0;
+}
+.py-2 {
+  padding: 2rem 0;
+}
+.py-3 {
+  padding: 3rem 0;
+}
+
+/* Margin */
+
 .my-1 {
   margin: 1rem 0;
 }
@@ -174,7 +202,12 @@ img {
   margin: 1.2rem 0;
 }
 
-.form input[type='text'] {
+.form input[type='text'],
+.form input[type='emil'],
+.form input[type='password'],
+.form input[type='date'],
+.form select,
+.form textarea {
   display: block;
   width: 100%;
   padding: 0.4rem;
@@ -202,4 +235,23 @@ img {
   padding: 2rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
+}
+
+/* Posts Page */
+.post-form .post-form-header {
+  background: var(--primary-color);
+  padding: 0.5rem;
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  grid-gap: 2rem;
+  border: solid 1px #ccc;
+  margin: 1rem 0;
+}
+
+.post img {
+  width: 100px;
 }

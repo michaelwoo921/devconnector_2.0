@@ -3,6 +3,7 @@ require('dotenv').config();
 const userRouter = require('./routes/api/users');
 const authRouter = require('./routes/api/auth');
 const profileRouter = require('./routes/api/profile');
+const postRouter = require('./routes/api/posts');
 const connectDB = require('./db');
 
 connectDB();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/posts', postRouter);
 
 app.get('/api', (req, res) => {
   res.send('api running ...');

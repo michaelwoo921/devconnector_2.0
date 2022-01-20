@@ -12,6 +12,7 @@ import Navbar from './components/layout/Navbar';
 import NotFound from './components/layout/NotFound';
 import Dashboard from './components/dashboard/Dashboard';
 import Profiles from './components/profiles/Profiles';
+import Posts from './components/posts/Posts';
 
 function App() {
   const auth = useSelector((state) => state.auth);
@@ -26,6 +27,10 @@ function App() {
           element={isAuthenticated ? <Dashboard /> : <Landing />}
         />
         <Route path="/profiles" element={<Profiles />} />
+        <Route
+          path="/posts"
+          element={isAuthenticated ? <Posts /> : <Login />}
+        />
         <Route
           path="/register"
           element={isAuthenticated ? <Dashboard /> : <Register />}
