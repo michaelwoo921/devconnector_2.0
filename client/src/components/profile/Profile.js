@@ -30,7 +30,7 @@ const Profile = ({ auth, profile: { profile }, getProfileById }) => {
           {auth.isAuthenticated &&
             !auth.loading &&
             auth.user._id === profile.user._id && (
-              <Link to="edit-profile" className="btn btn-dark">
+              <Link to="/edit-profile" className="btn btn-dark">
                 Edit Profile
               </Link>
             )}
