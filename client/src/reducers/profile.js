@@ -1,10 +1,17 @@
-import { GET_PROFILES, PROFILE_ERROR } from '../actions/types';
+import {
+  GET_PROFILES,
+  PROFILE_ERROR,
+  GET_PROFILE,
+  GET_REPOS,
+  NO_REPOS,
+} from '../actions/types';
 
 const initialState = {
   profiles: [],
   profile: null,
   loading: true,
   error: {},
+  repos: [],
 };
 
 const profile = (state = initialState, action) => {
@@ -15,8 +22,18 @@ const profile = (state = initialState, action) => {
         profiles: action.payload,
         loading: false,
       };
+    case GET_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        profile: action.payload,
+      };
     case PROFILE_ERROR:
       return { ...state, loading: false, error: action.payload };
+    case GET_REPOS:
+      return { ...state, repos: action.payload, loading: false };
+    case NO_REPOS:
+      return { ...state, repos: [] };
     default:
       return state;
   }

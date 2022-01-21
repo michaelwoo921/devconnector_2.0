@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/auth';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { isAuthenticated } = auth;
@@ -17,10 +18,16 @@ const Navbar = () => {
         <Link to="/posts"> Posts</Link>
       </li>
       <li>
-        <Link to="/dashboard"> Dashboard</Link>
+        <Link to="/"> Dashboard</Link>
       </li>
       <li>
-        <a href="#!" onClick={() => dispatch(logout())}>
+        <a
+          href="#!"
+          onClick={() => {
+            dispatch(logout());
+            navigate('/');
+          }}
+        >
           {' '}
           Logout
         </a>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = ({ login }) => {
+  const navigate = useNavigate();
+
   const initialState = { email: '', password: '' };
   const [formData, setFormData] = useState(initialState);
   const { email, password } = formData;
@@ -14,7 +16,9 @@ const Login = ({ login }) => {
     e.preventDefault();
 
     login(email, password);
+    navigate('/');
   };
+
   return (
     <section className="container">
       <h1 className="large text-primary"> Sign In</h1>

@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getProfiles } from '../../actions/profiles';
+import { getProfiles } from '../../actions/profile';
 import ProfileItem from './ProfileItem';
 
 const Profiles = ({ profile: { profiles, loading }, getProfiles }) => {

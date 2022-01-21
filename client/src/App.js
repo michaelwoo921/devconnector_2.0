@@ -12,7 +12,12 @@ import Navbar from './components/layout/Navbar';
 import NotFound from './components/layout/NotFound';
 import Dashboard from './components/dashboard/Dashboard';
 import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
+import ProfileForm from './components/profile-forms/ProfileForm';
+import AddEducation from './components/profile-forms/AddEducation';
+import AddExperience from './components/profile-forms/AddExperience';
 
 function App() {
   const auth = useSelector((state) => state.auth);
@@ -22,23 +27,28 @@ function App() {
       <Navbar />
       <Alert />
       <Routes>
-        <Route
-          path="/"
-          element={isAuthenticated ? <Dashboard /> : <Landing />}
-        />
         <Route path="/profiles" element={<Profiles />} />
-        <Route
-          path="/posts"
-          element={isAuthenticated ? <Posts /> : <Login />}
-        />
-        <Route
-          path="/register"
-          element={isAuthenticated ? <Dashboard /> : <Register />}
-        />
-        <Route
-          path="/login"
-          element={isAuthenticated ? <Dashboard /> : <Login />}
-        />
+        <Route path="/profile/:id" element={<Profile />} />
+        {isAuthenticated && <Route path="/" element={<Dashboard />} />}
+        {isAuthenticated && <Route path="/posts" element={<Posts />} />}
+        {isAuthenticated && <Route path="/posts/:id" element={<Post />} />}
+        {isAuthenticated && (
+          <Route path="/create-profile" element={<ProfileForm />} />
+        )}
+        {isAuthenticated && (
+          <Route path="/edit-profile" element={<ProfileForm />} />
+        )}
+        {isAuthenticated && (
+          <Route path="/add-education" element={<AddEducation />} />
+        )}
+        {isAuthenticated && (
+          <Route path="/add-experience" element={<AddExperience />} />
+        )}
+
+        {!isAuthenticated && <Route path="/" element={<Landing />} />}
+        {!isAuthenticated && <Route path="/register" element={<Register />} />}
+        {!isAuthenticated && <Route path="/login" element={<Login />} />}
+
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </Router>

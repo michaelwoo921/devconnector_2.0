@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../layout/Alert';
 
 const Register = ({ setAlert, register }) => {
+  const navigate = useNavigate();
   const initialState = {
     name: '',
     email: '',
@@ -22,8 +23,10 @@ const Register = ({ setAlert, register }) => {
     e.preventDefault();
     if (password !== password2) {
       setAlert('password does not match', 'danger');
+    } else {
+      register(formData);
+      navigate('/');
     }
-    register(formData);
   };
   return (
     <section className="container">

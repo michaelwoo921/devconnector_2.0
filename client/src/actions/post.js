@@ -1,5 +1,6 @@
 const { GET_POSTS, POST_ERROR } = require('./types');
 const axios = require('axios');
+const api = require('../utils/api');
 
 export const getPosts = () => async (dispatch) => {
   const config = {

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/michaelwoo921/devconnector_2.0#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.0.0",
     "dotenv": "^14.2.0",

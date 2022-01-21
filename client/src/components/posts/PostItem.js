@@ -1,21 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import formatDate from '../../utils/formatDate';
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post: { _id, user, text, name, avatar, date } }) => {
   return (
-    <div className="post">
+    <div className="post bg-white my-1 p-1">
       <div>
-        <a href="#!">
-          <img src={post.avatar} alt="avatar" />
-          <h4> {post.name}</h4>
-        </a>
+        <Link to={`/profile/${user._id}`}>
+          <img src={avatar} alt="avatar" className="round-img" />
+          <h4> {name}</h4>
+        </Link>
       </div>
       <div>
-        <p>{post.text}</p>
-        <p> Posted on 04/16/2019</p>
+        <p>{text}</p>
+        <p className="post-date"> Posted on {formatDate(date)}</p>
         <div>
           <button type="button" className="btn btn-light">
-            up
+            up 3
           </button>
           <button type="button" className="btn btn-light">
             down
