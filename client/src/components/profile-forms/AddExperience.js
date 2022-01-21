@@ -1,7 +1,105 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addExperience } from '../../actions/profile';
 
-const AddExperience = () => {
-  return <div> add experience</div>;
+const AddExperience = ({ addExperience }) => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    company: '',
+    title: '',
+    location: '',
+    from: '',
+    to: '',
+    current: false,
+    description: '',
+  });
+
+  const { company, title, location, from, to, current, description } = formData;
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const submitForm = (e) => {
+    e.preventDefault();
+    addExperience(formData, navigate);
+  };
+  return (
+    <section className="container">
+      <h1 className="large text-primary">Add An Experience</h1>
+      <p className="lead">
+        <i className="fas fa-code-branch"></i> Add any developer/programming
+        positions that you have had in the past
+      </p>
+      <small>* = required field</small>
+      <form className="form" onSubmit={submitForm}>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="* Job Title"
+            name="title"
+            required
+            value={title}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="* Company"
+            name="company"
+            required
+            value={company}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Location"
+            name="location"
+            value={location}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <h4>From Date</h4>
+          <input type="date" name="from" value={from} onChange={onChange} />
+        </div>
+        <div className="form-group">
+          <p>
+            <input
+              type="checkbox"
+              name="current"
+              value={current}
+              checked={current}
+              onChange={() => {
+                setFormData({ ...formData, current: !current });
+              }}
+            />{' '}
+            Current Job
+          </p>
+        </div>
+        <div className="form-group">
+          <h4>To Date</h4>
+          <input type="date" name="to" value={to} onChange={onChange} />
+        </div>
+        <div className="form-group">
+          <textarea
+            name="description"
+            cols="30"
+            rows="5"
+            placeholder="Job Description"
+            value={description}
+            onChange={onChange}
+          ></textarea>
+        </div>
+        <input type="submit" className="btn btn-primary my-1" />
+        <Link className="btn btn-light my-1" to="/">
+          Go Back
+        </Link>
+      </form>
+    </section>
+  );
 };
 
-export default AddExperience;
+export default connect(null, { addExperience })(AddExperience);
