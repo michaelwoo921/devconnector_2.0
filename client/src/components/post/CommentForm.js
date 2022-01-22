@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addComment } from '../../actions/post';
 
-const CommentForm = ({ postId }) => {
+const CommentForm = ({ postId, addComment }) => {
   const [text, setText] = useState('');
 
   const submitForm = (e) => {

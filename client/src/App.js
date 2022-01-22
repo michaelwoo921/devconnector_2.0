@@ -22,6 +22,7 @@ import AddExperience from './components/profile-forms/AddExperience';
 function App() {
   const auth = useSelector((state) => state.auth);
   const { isAuthenticated } = auth;
+
   return (
     <Router>
       <Navbar />

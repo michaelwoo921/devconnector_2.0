@@ -1,4 +1,4 @@
-const {
+import {
   GET_POSTS,
   POST_ERROR,
   GET_POST,
@@ -7,21 +7,17 @@ const {
   ADD_COMMENT,
   REMOVE_COMMENT,
   UPDATE_LIKES,
-} = require('./types');
-const axios = require('axios');
-const api = require('../utils/api');
-const { setAlert } = require('./alert');
+} from './types';
+
+import api from '../utils/api';
+import setAuthToken from '../utils/setAuthToken';
+import { setAlert } from './alert';
 
 //get posts
 export const getPosts = () => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.token}`,
-    },
-  };
+  // setAuthToken(localStorage.token);
   try {
-    const res = await axios.get('/api/posts', config);
+    const res = await api.get('/posts');
 
     dispatch({
       type: GET_POSTS,
@@ -40,13 +36,9 @@ export const getPosts = () => async (dispatch) => {
 
 // Add post
 export const addPost = (formData) => async (dispatch) => {
+  // setAuthToken(localStorage.token);
   try {
-    const res = await axios.post('/api/posts', formData, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    });
+    const res = await api.post('/posts', formData);
 
     dispatch({
       type: ADD_POST,
@@ -64,8 +56,7 @@ export const addPost = (formData) => async (dispatch) => {
 
 // Get post
 export const getPost = (id) => async (dispatch) => {
-  const token = localStorage.token;
-  console.log(token);
+  // setAuthToken(localStorage.token);
   try {
     const res = await api.get(`/posts/${id}`);
 
@@ -84,12 +75,7 @@ export const getPost = (id) => async (dispatch) => {
 // Delete post
 export const deletePost = (id) => async (dispatch) => {
   try {
-    await axios.delete(`/api/posts/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    });
+    await api.delete(`/posts/${id}`);
 
     dispatch({
       type: DELETE_POST,
@@ -108,8 +94,8 @@ export const deletePost = (id) => async (dispatch) => {
 // Add like
 export const addLike = (id) => async (dispatch) => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/posts/like/${id}`);
-    console.log('2');
+    const res = await api.put(`/posts/like/${id}`);
+
     dispatch({
       type: UPDATE_LIKES,
       payload: { id, likes: res.data },
@@ -125,12 +111,7 @@ export const addLike = (id) => async (dispatch) => {
 // Remove like
 export const removeLike = (id) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/posts/unlike/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    });
+    const res = await api.put(`/posts/unlike/${id}`);
 
     dispatch({
       type: UPDATE_LIKES,

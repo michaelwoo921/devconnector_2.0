@@ -10,17 +10,12 @@ import {
 } from './types';
 import { setAlert } from './alert';
 import api from '../utils/api';
-import axios from 'axios';
+import setAuthToken from '../utils/setAuthToken';
 
 // Get current users profile
 export const getCurrentProfile = () => async (dispatch) => {
   try {
-    const res = await axios.get('/api/profile/me', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    });
+    const res = await api.get('/profile/me');
 
     dispatch({
       type: GET_PROFILE,
@@ -53,9 +48,7 @@ export const getProfiles = () => async (dispatch) => {
 // Get profile by ID
 export const getProfileById = (userId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/profile/users/${userId}`, {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const res = await api.get(`/profile/users/${userId}`);
 
     dispatch({
       type: GET_PROFILE,
@@ -90,15 +83,10 @@ export const getGithubRepos = (username) => async (dispatch) => {
 export const createProfile =
   (formData, navigate, edit = false) =>
   async (dispatch) => {
+    setAuthToken(localStorage.token);
     try {
-      console.log('1');
-      const res = await axios.post('/api/profile', formData, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.token}`,
-        },
-      });
-      console.log('2');
+      const res = await api.post('/profile', formData);
+
       dispatch({
         type: GET_PROFILE,
         payload: res.data,
@@ -108,7 +96,6 @@ export const createProfile =
         navigate('/');
       }
     } catch (error) {
-      console.log('3');
       dispatch({
         type: PROFILE_ERROR,
         payload: {
