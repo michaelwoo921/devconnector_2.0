@@ -2,7 +2,6 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../../actions/profile';
-import { createStore } from 'redux';
 
 const initialState = {
   company: '',
@@ -65,6 +64,7 @@ const ProfileForm = ({
 
   const submitForm = (e) => {
     e.preventDefault();
+    console.log(formData);
     createProfile(formData, navigate, profile ? true : false);
   };
   return (
@@ -159,7 +159,7 @@ const ProfileForm = ({
             value={bio}
             onChange={onChange}
           ></textarea>
-          <small class="form-text">Tell us a little about yourself</small>
+          <small className="form-text">Tell us a little about yourself</small>
         </div>
 
         <div className="my-2">

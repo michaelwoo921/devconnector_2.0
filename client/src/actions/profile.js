@@ -91,12 +91,14 @@ export const createProfile =
   (formData, navigate, edit = false) =>
   async (dispatch) => {
     try {
+      console.log('1');
       const res = await axios.post('/api/profile', formData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.token}`,
         },
       });
+      console.log('2');
       dispatch({
         type: GET_PROFILE,
         payload: res.data,
@@ -106,6 +108,7 @@ export const createProfile =
         navigate('/');
       }
     } catch (error) {
+      console.log('3');
       dispatch({
         type: PROFILE_ERROR,
         payload: {
@@ -128,7 +131,7 @@ export const addExperience = (formData, navigate) => async (dispatch) => {
 
     dispatch(setAlert('Experience Added', 'success'));
 
-    navigate('/dashboard');
+    navigate('/');
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -155,7 +158,7 @@ export const addEducation = (formData, navigate) => async (dispatch) => {
 
     dispatch(setAlert('Education Added', 'success'));
 
-    navigate('/dashboard');
+    navigate('/');
   } catch (err) {
     const errors = err.response.data.errors;
 
